@@ -10,14 +10,24 @@
 	</title>
 	<!-- Latest compiled and minified CSS kindly hosted -->
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<style>
+	.grey-box{
+		background-color: #EEE;
+	}
+	</style>
 </head>
 <body>
+<div class="grey-box">
 <div class="container">
 <h1>quikFilter demos</h1>
-<p>quikFilter is a suite of filtering functions written in jQuery that is released under open source licenses to allow anyone to use filtering on HTML DOM with relative ease. It contains quikFilter and multiFilter, both of which are demonstrated here. To view the source code, fork, post an issue or discuss this project, view it on <a href="https://github.com/tomtomau/quikfilter">Github</a>.
-<hr>
+<p>quikFilter is a suite of filtering functions written in jQuery that is released under open source licenses to allow anyone to use filtering on HTML DOM with relative ease. It contains quikFilter and multiFilter, both of which are demonstrated here. To view the source code, fork, post an issue or discuss this project, view it on <a href="https://github.com/tomtomau/quikfilter">Github</a>.<br>
+<strong>Jump to:</strong> <a href="#quikFilter">quikFilter</a> - <a href="#multifilter">multiFilter</a> - <a href="#nested_multifilter">Nested multiFilter</a> - <a href="#license">License</a>
+</p>
+</div>
+</div>
+<div class="container">
 <!-- Original quikFilter -->
-<h1>quikFilter</h1>
+<h1 id="quikFilter">quikFilter</h1>
 <p>quikFilter allows for very simple filtering with little work required. It filters based on custom attributes and is enabled with jQuery.</p>
 <h3>Usage</h3>
 <p>Each element (&lt;li> in the case of the demo) has an attribute called "tag" which is then use in jQuery later when activating quikFilter. The HTML code of the list used in the demo is shown below to demonstrate the use of custom HTML attributes.<br>
@@ -57,7 +67,7 @@ $("#searchfield").on("keyup", {search:"tag"}, quikFilter);
 <hr>
 
 <!-- Multi filter -->
-<h1>multiFilter</h1>
+<h1 id="multifilter">multiFilter</h1>
 <p>Multifilter allows you to have multiple strings in the attributes which can then be filtered. All tag elements are entered into the html attributes, separated by commas. 
 
 <h3>Usage</h3>
@@ -97,7 +107,7 @@ $("#multisearchfield").on("keyup", {search:"tags"}, multiFilter);
 </div>
 <hr>
 <!-- Nested filters -->
-<h2>Nested multiFilters</h2>
+<h2 id="nested_multifilter">Nested multiFilters</h2>
 <p>Nested filters allow grouping of filterable elements and hides empty 'nests'. It is easily enabled by adding a nested event.data parameter.</p>
 
 <h3>Usage</h3>
@@ -191,7 +201,34 @@ $("#nested_multisearchfield").on("keyup", {search:"food", nested:"recipes"}, mul
 <!-- End nested filters -->
 </div>
 <hr>
+<h1 id="license">License</h1>
+<p>
+The quikFilter suite is delivered under the MIT Software License. Be nice :)<br><br>
+<a href="https://github.com/tomtomau/quikfilter/blob/master/LICENSE.txt"><strong>LICENSE.txt (on GitHub)</strong></a></p>
+<pre>
+The MIT License (MIT)
 
+Copyright (c) 2013 Tom Newby
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre>
+<hr>
 <p>Created by <a href="http://tomnewby.net">Tom Newby</a><br>
 View on <a href="https://github.com/tomtomau/quikfilter">Github</a> -
 Built with <a href="http://getbootstrap.com">Bootstrap.</a></p>
