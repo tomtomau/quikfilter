@@ -13,26 +13,187 @@
 </head>
 <body>
 <div class="container">
-<h1>Basic quikFilter demo</h1>
-<p>This is a searchable list. Each element (&lt;li> in this case) has an attribute called "tag" which is then use in jQuery later when activating quikFilter.</p>
-<input type="text" class="form-control" placeholder="Search" id="searchfield">
+<h1>quikFilter demos</h1>
+<p>quikFilter is a suite of filtering functions written in jQuery that is released under open source licenses to allow anyone to use filtering on HTML DOM with relative ease. It contains quikFilter and multiFilter, both of which are demonstrated here. To view the source code, fork, post an issue or discuss this project, view it on <a href="https://github.com/tomtomau/quikfilter">Github</a>.
+<hr>
+<!-- Original quikFilter -->
+<h1>quikFilter</h1>
+<p>quikFilter allows for very simple filtering with little work required. It filters based on custom attributes and is enabled with jQuery.</p>
+<h3>Usage</h3>
+<p>Each element (&lt;li> in the case of the demo) has an attribute called "tag" which is then use in jQuery later when activating quikFilter. The HTML code of the list used in the demo is shown below to demonstrate the use of custom HTML attributes.<br>
+<strong>HTML Code</strong></p>
+<pre>
+&lt;strong&gt;Shopping List&lt;/strong&gt;:
+&lt;ul&gt;
+	&lt;li tag=&quot;egg&quot;&gt;Egg&lt;/li&gt;
+	&lt;li tag=&quot;milk&quot;&gt;Milk&lt;/li&gt;
+	&lt;li tag=&quot;bread&quot;&gt;Bread&lt;/li&gt;
+	&lt;li tag=&quot;eggnog&quot;&gt;Eggnog&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+
+<p>quikFilter is enabled in the demo below with jQuery using an event handler:<br>
+<strong>Javascript/jQuery Code</strong></p>
+<pre>
+$("#searchfield").on("keyup", {search:"tag"}, quikFilter);
+</pre>
+<p>You can use any event handler to perform the filtering but .on() gives the best response. The 'search' attribute is the name of the attribute for which the quikFilter will be using to filter. It allows you to use custom attributes (such as 'tag', used in this demo) to filter elements. This means that you can use attributes like 'name', 'address' or 'flavour' - anything you want.</p>
+
+<h3>Demo: </h3>
+<div class="well">
+<input type="text" class="form-control" placeholder="Search for items in shopping list" id="quiksearchfield">
 <br>
-<strong>List</strong>:
+<!-- Data to be filtered -->
+<strong>Shopping List</strong>:
 <ul>
 <li tag="egg">Egg</li>
 <li tag="milk">Milk</li>
 <li tag="bread">Bread</li>
 <li tag="eggnog">Eggnog</li>
 </ul>
+<!-- End filtering data -->
+</div>
 <hr>
-<h1>How does it work?</h1>
-<p>quikFilter is enabled with jQuery using an event handler:</p>
-<blockquote>
-	$("#searchfield").on("keyup", {search:"tag"}, quikFilter);
-</blockquote>
-<p>You can use any event handler to perform the filtering but .on() gives the best response. The 'search' attribute is the name of the attribute for which the quikFilter will be using to filter. It allows you to use custom attributes (such as 'tag', used in this demo) to filter elements. This means that you can use attributes like 'name', 'address' or 'flavour' - anything you want.</p>
+
+<!-- Multi filter -->
+<h1>multiFilter</h1>
+<p>Multifilter allows you to have multiple strings in the attributes which can then be filtered. All tag elements are entered into the html attributes, separated by commas. 
+
+<h3>Usage</h3>
+<p>multiFilter expects the attribute value to be separated by commas in a single string as shown in the HTML code of the demo, below.</p>
+<pre>
+&lt;li tags=&quot;chocolate, cake&quot;&gt;
+	&lt;a class=&quot;title&quot;&gt;Simple Moist Chocolate Cake&lt;/a&gt;
+	&lt;span class=&quot;badge&quot;&gt;chocolate&lt;/span&gt;&lt;span class=&quot;badge&quot;&gt;cake&lt;/span&gt;
+&lt;/li&gt;
+</pre>
+<p>multiFilter is enabled in the demo below with jQuery using an event handler:</p>
+<pre>
+$("#multisearchfield").on("keyup", {search:"tags"}, multiFilter);
+</pre>
+<p>You can use any event handler to perform the filtering but .on() gives the best response. The 'search' attribute is the name of the attribute for which the quikFilter will be using to filter.</p>
+
+<div class="well">
+<input type="text" class="form-control" placeholder="Search in tags" id="multisearchfield">
+<br><strong>Recipes</strong>:
+<ul>
+<li tags="chocolate">
+		<a class="title">Chocolate Mousse with Raspberry Coulis</a>
+		<span class="badge">chocolate</span>
+</li>
+
+<li tags="chocolate, cake">
+		<a class="title">Simple Moist Chocolate Cake</a>
+		<span class="badge">chocolate</span><span class="badge">cake</span>
+</li>
+
+<li tags="fruit, cake">
+		<a class="title">Fruit Cake</a>
+		<span class="badge">fruit</span><span class="badge">cake</span>
+</li>
+</ul>
+<!-- End multifilter -->
+</div>
 <hr>
-<p>View on <a href="https://github.com/tomtomau/quikfilter">Github</a> -
+<!-- Nested filters -->
+<h2>Nested multiFilters</h2>
+<p>Nested filters allow grouping of filterable elements and hides empty 'nests'. It is easily enabled by adding a nested event.data parameter.</p>
+
+<h3>Usage</h3>
+<p>Nested multifilter does not strictly specify the generational gap between the nest and the element (that is, how many children deep) so as long as the element is a child of a child... of the nest, then it will be appropriately filtered. The code of the demo is shown below to demonstrate how this works with Bootstrap panels.</p>
+<pre>
+&lt;div class=&quot;panel panel-default recipes&quot;&gt;
+	&lt;div class=&quot;panel-heading&quot;&gt;
+	Entree
+	&lt;/div&gt;
+	&lt;div class=&quot;panel-body&quot;&gt;
+		&lt;ul&gt;
+		&lt;li food=&quot;dip, basil&quot;&gt;
+			&lt;a class=&quot;title&quot;&gt;Basil Dip&lt;/a&gt;
+			&lt;span class=&quot;badge&quot;&gt;dip&lt;/span&gt;&lt;span class=&quot;badge&quot;&gt;basil&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;li food=&quot;dip, guacamole&quot;&gt;
+			&lt;a class=&quot;title&quot;&gt;5 minute Guac&lt;/a&gt;
+			&lt;span class=&quot;badge&quot;&gt;dip&lt;/span&gt;&lt;span class=&quot;badge&quot;&gt;guacamole&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;li food=&quot;cheese, quick, paprika&quot;&gt;
+			&lt;a class=&quot;title&quot;&gt;Quick Paprika Cheeseball&lt;/a&gt;
+			&lt;span class=&quot;badge&quot;&gt;cheese&lt;/span&gt;&lt;span class=&quot;badge&quot;&gt;quick&lt;/span&gt;&lt;span class=&quot;badge&quot;&gt;paprika&lt;/span&gt;
+		&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>Nested multifilter is enabled in the demo below with jQuery using an event handler:</p>
+<pre>
+$("#nested_multisearchfield").on("keyup", {search:"food", nested:"recipes"}, multiFilter);
+</pre>
+<p>You can use any event handler to perform the filtering but .on() gives the best response. The 'search' parameter is the name of the attribute for which multiFilter will be using to filter. The 'nested' parameter is the class of DOM object which is the parent, grand-parent, grand-grand-parent (etc.) of the elements to be filtered. If there is no results within this object, the object will be hidden.</p>
+
+<h3>Demo: </h3>
+<div class="well">
+<!-- Nested filter demo -->
+<input type="text" class="form-control" placeholder="Search in tags" id="nested_multisearchfield">
+<br>
+<div class="panel panel-default recipes">
+	<div class="panel-heading">
+	Entree
+	</div>
+	<div class="panel-body">
+		<ul>
+		<li food="dip, basil">
+				<a class="title">Basil Dip</a>
+				<span class="badge">dip</span><span class="badge">basil</span>
+	
+		</li>
+
+		<li food="dip, guacamole">
+				<a class="title">5 minute Guac</a>
+				<span class="badge">dip</span><span class="badge">guacamole</span>
+	
+		</li>
+
+		<li food="cheese, quick, paprika">
+				<a class="title">Quick Paprika Cheeseball</a>
+				<span class="badge">cheese</span><span class="badge">quick</span><span class="badge">paprika</span>
+	
+		</li>
+		</ul>
+	</div>
+</div>
+<div class="panel panel-default recipes">
+	<div class="panel-heading">
+	Desserts
+	</div>
+	<div class="panel-body">
+		<ul>
+		<li food="chocolate">
+				<a class="title">Chocolate Mousse with Raspberry Coulis</a>
+				<span class="badge">chocolate</span>
+	
+		</li>
+
+		<li food="chocolate, cake">
+				<a class="title">Simple Moist Chocolate Cake</a>
+				<span class="badge">chocolate</span><span class="badge">cake</span>
+	
+		</li>
+
+		<li food="fruit, cake">
+				<a class="title">Fruit Cake</a>
+				<span class="badge">fruit</span><span class="badge">cake</span>
+	
+		</li>
+		</ul>
+	</div>
+</div>
+<!-- End nested filters -->
+</div>
+<hr>
+
+<p>Created by <a href="http://tomnewby.net">Tom Newby</a><br>
+View on <a href="https://github.com/tomtomau/quikfilter">Github</a> -
 Built with <a href="http://getbootstrap.com">Bootstrap.</a></p>
 </div>
 <!-- Latest compiled and minified JavaScript -->
@@ -41,7 +202,10 @@ Built with <a href="http://getbootstrap.com">Bootstrap.</a></p>
 <script src="quikFilter.js"></script>
 <script>
 $(function(){
-	$("#searchfield").on("keyup", {search:"tag"}, quikFilter);
+	$("#quiksearchfield").on("keyup", {search:"tag"}, quikFilter);
+	$("#multisearchfield").on("keyup", {search:"tags"}, multiFilter);
+	$("#nested_multisearchfield").on("keyup", {search:"food", nested:"recipes"}, multiFilter);
+
 });
 </script>
 </body>
