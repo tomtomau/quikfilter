@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>
+	quikFilter demo
+	</title>
+	<!-- Latest compiled and minified CSS kindly hosted -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<h1>Basic quikFilter demo</h1>
+<p>This is a searchable list. Each element (&lt;li> in this case) has an attribute called "tag" which is then use in jQuery later when activating quikFilter.</p>
+<input type="text" class="form-control" placeholder="Search" id="searchfield">
+<br>
+<strong>List</strong>:
+<ul>
+<li tag="egg">Egg</li>
+<li tag="milk">Milk</li>
+<li tag="bread">Bread</li>
+<li tag="eggnog">Eggnog</li>
+</ul>
+<hr>
+<h1>How does it work?</h1>
+<p>quikFilter is enabled with jQuery using an event handler:</p>
+<blockquote>
+	$("#searchfield").on("keyup", {search:"tag"}, quikFilter);
+</blockquote>
+<p>You can use any event handler to perform the filtering but .on() gives the best response. The 'search' attribute is the name of the attribute for which the quikFilter will be using to filter. It allows you to use custom attributes (such as 'tag', used in this demo) to filter elements. This means that you can use attributes like 'name', 'address' or 'flavour' - anything you want.</p>
+<hr>
+<p>View on <a href="https://github.com/tomtomau/quikfilter">Github</a> -
+Built with <a href="http://getbootstrap.com">Bootstrap.</a></p>
+</div>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="quikFilter.js"></script>
+<script>
+$(function(){
+	$("#searchfield").on("keyup", {search:"tag"}, quikFilter);
+});
+</script>
+</body>
+</html>
